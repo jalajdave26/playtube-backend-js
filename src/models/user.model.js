@@ -51,10 +51,11 @@ const userSchema = new Schema(
   }
 );
 
+
 userSchema.pre("save", function (next) {
   if (!this.isModified("password")) return next();
 
-  this.password = bcrypt.hash(this.password, 10);
+  this.password =  bcrypt.hash(this.password, 10);
   next();
 });
 
@@ -88,4 +89,4 @@ userSchema.methods.genrateRefreshToken = function () {
   );
 };
 
-export const user = mongoose.model("User", userSchema);
+export const User = mongoose.model("User", userSchema);
